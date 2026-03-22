@@ -1,0 +1,139 @@
+[gd_scene format=3 uid="uid://n7koj0ico0uo"]
+
+[ext_resource type="Script" uid="uid://b3w0vcopv1wim" path="res://Demo/Enemy/Enemy.cs" id="1_1ypri"]
+[ext_resource type="Texture2D" uid="uid://c8tjiyd3iigbr" path="res://icon.svg" id="1_fkela"]
+[ext_resource type="Script" uid="uid://dwef71aunc2uf" path="res://nodes/composites/BTParallel.cs" id="1_vso2s"]
+[ext_resource type="Script" uid="uid://bhflbosr3ficp" path="res://Demo/Enemy/Action_MoveTowardPlayer.cs" id="2_fkela"]
+[ext_resource type="Script" uid="uid://cr85evtguvfv7" path="res://nodes/decorators/Cooldown.cs" id="3_d2k2y"]
+[ext_resource type="Script" uid="uid://d81m05b4dt0k" path="res://nodes/root/BTRoot.cs" id="3_kvarv"]
+[ext_resource type="Script" uid="uid://betnxyksq8fhk" path="res://nodes/composites/BTMemorySequence.cs" id="4_s5gka"]
+[ext_resource type="Script" uid="uid://qpk0horg05db" path="res://Demo/Enemy/Condition_IsPlayerNearby.cs" id="5_fkela"]
+[ext_resource type="Script" uid="uid://rhffext4rqrk" path="res://nodes/composites/BTReactiveSelector.cs" id="6_s5gka"]
+[ext_resource type="Script" uid="uid://ce4yre30n4jlb" path="res://nodes/composites/BTReactiveSequence.cs" id="6_u7n3c"]
+[ext_resource type="Script" uid="uid://b2t44pt2bl4e5" path="res://Demo/Enemy/Condition_IsPlayerWithinDistance.cs" id="7_nwx4d"]
+[ext_resource type="Script" uid="uid://bw8kfjqkp83c1" path="res://Demo/Enemy/Action_LaunchBullet.cs" id="7_uxjip"]
+[ext_resource type="Script" uid="uid://cluote4774wna" path="res://Demo/Enemy/Action_SpreadBullet.cs" id="8_o5xt3"]
+[ext_resource type="PackedScene" uid="uid://b7gxqnf8js8fc" path="res://Demo/Enemy/Bullet.tscn" id="9_uxjip"]
+[ext_resource type="Script" uid="uid://5o86wwe4pfog" path="res://nodes/decorators/Repeat.cs" id="14_mp8wm"]
+[ext_resource type="Script" uid="uid://cbj2vvtafpc3o" path="res://nodes/decorators/Delay.cs" id="16_5v73r"]
+[ext_resource type="Script" uid="uid://xl0r4y2oa28h" path="res://Demo/Enemy/Action_GetConfused.cs" id="16_fbm3w"]
+[ext_resource type="Script" uid="uid://cfofljhjwenuw" path="res://Demo/Enemy/Action_Patrol.cs" id="17_fbm3w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d2k2y"]
+size = Vector2(128, 128)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kvarv"]
+radius = 740.0027
+
+[node name="Enemy" type="CharacterBody2D" unique_id=898667702]
+collision_layer = 2
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_1ypri")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=493276866]
+unique_name_in_owner = true
+modulate = Color(0, 0.18333316, 1, 1)
+texture = ExtResource("1_fkela")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=62906948]
+shape = SubResource("RectangleShape2D_d2k2y")
+
+[node name="Detector" type="Area2D" parent="." unique_id=1740389222]
+unique_name_in_owner = true
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector" unique_id=450860164]
+shape = SubResource("CircleShape2D_kvarv")
+
+[node name="BTRoot" type="Node" parent="." unique_id=170631762]
+unique_name_in_owner = true
+script = ExtResource("3_kvarv")
+metadata/_custom_type_script = "uid://d81m05b4dt0k"
+
+[node name="RSel" type="Node" parent="BTRoot" unique_id=1217053846]
+script = ExtResource("6_s5gka")
+metadata/_custom_type_script = "uid://rhffext4rqrk"
+
+[node name="MSeq_SpreadBullet" type="Node" parent="BTRoot/RSel" unique_id=1023230693]
+script = ExtResource("4_s5gka")
+metadata/_custom_type_script = "uid://betnxyksq8fhk"
+
+[node name="IsPlayerNearby" type="Node" parent="BTRoot/RSel/MSeq_SpreadBullet" unique_id=11957836]
+script = ExtResource("5_fkela")
+metadata/_custom_type_script = "uid://b3bo2uw0r20x3"
+
+[node name="Cooldown" type="Node" parent="BTRoot/RSel/MSeq_SpreadBullet" unique_id=1542674250]
+script = ExtResource("3_d2k2y")
+CooldownTimeInSeconds = 3.0
+metadata/_custom_type_script = "uid://cr85evtguvfv7"
+
+[node name="SpreadBullet" type="Node" parent="BTRoot/RSel/MSeq_SpreadBullet/Cooldown" unique_id=5031334]
+script = ExtResource("8_o5xt3")
+BulletScene = ExtResource("9_uxjip")
+BulletCount = 10.0
+metadata/_custom_type_script = "uid://cjxduffu2ml43"
+
+[node name="RSeq_FollowAndAttack" type="Node" parent="BTRoot/RSel" unique_id=792592367]
+script = ExtResource("6_u7n3c")
+metadata/_custom_type_script = "uid://ce4yre30n4jlb"
+
+[node name="IsPlayerNearby" type="Node" parent="BTRoot/RSel/RSeq_FollowAndAttack" unique_id=1069127054]
+script = ExtResource("5_fkela")
+metadata/_custom_type_script = "uid://b3bo2uw0r20x3"
+
+[node name="Para" type="Node" parent="BTRoot/RSel/RSeq_FollowAndAttack" unique_id=508188872]
+script = ExtResource("1_vso2s")
+SuccessThreshold = 2
+FailureThreshold = 2
+metadata/_custom_type_script = "uid://dwef71aunc2uf"
+
+[node name="Repeat" type="Node" parent="BTRoot/RSel/RSeq_FollowAndAttack/Para" unique_id=2052164013]
+script = ExtResource("14_mp8wm")
+metadata/_custom_type_script = "uid://5o86wwe4pfog"
+
+[node name="Cooldown" type="Node" parent="BTRoot/RSel/RSeq_FollowAndAttack/Para/Repeat" unique_id=1791312872]
+script = ExtResource("3_d2k2y")
+CooldownTimeInSeconds = 0.5
+metadata/_custom_type_script = "uid://cr85evtguvfv7"
+
+[node name="LaunchBullet" type="Node" parent="BTRoot/RSel/RSeq_FollowAndAttack/Para/Repeat/Cooldown" unique_id=1609761011]
+script = ExtResource("7_uxjip")
+BulletScene = ExtResource("9_uxjip")
+metadata/_custom_type_script = "uid://cjxduffu2ml43"
+
+[node name="Repeat2" type="Node" parent="BTRoot/RSel/RSeq_FollowAndAttack/Para" unique_id=124161194]
+script = ExtResource("14_mp8wm")
+metadata/_custom_type_script = "uid://5o86wwe4pfog"
+
+[node name="RSel" type="Node" parent="BTRoot/RSel/RSeq_FollowAndAttack/Para/Repeat2" unique_id=840279874]
+script = ExtResource("6_s5gka")
+metadata/_custom_type_script = "uid://rhffext4rqrk"
+
+[node name="IsPlayerWithinDistance" type="Node" parent="BTRoot/RSel/RSeq_FollowAndAttack/Para/Repeat2/RSel" unique_id=86648231]
+script = ExtResource("7_nwx4d")
+metadata/_custom_type_script = "uid://b3bo2uw0r20x3"
+
+[node name="MoveTowardPlayer" type="Node" parent="BTRoot/RSel/RSeq_FollowAndAttack/Para/Repeat2/RSel" unique_id=829413243]
+script = ExtResource("2_fkela")
+metadata/_custom_type_script = "uid://cjxduffu2ml43"
+
+[node name="RSeq_Patrol" type="Node" parent="BTRoot/RSel" unique_id=1588689386]
+script = ExtResource("4_s5gka")
+metadata/_custom_type_script = "uid://betnxyksq8fhk"
+
+[node name="Delay" type="Node" parent="BTRoot/RSel/RSeq_Patrol" unique_id=1561361783]
+script = ExtResource("16_5v73r")
+metadata/_custom_type_script = "uid://cbj2vvtafpc3o"
+
+[node name="GetConfused" type="Node" parent="BTRoot/RSel/RSeq_Patrol/Delay" unique_id=267818650]
+script = ExtResource("16_fbm3w")
+metadata/_custom_type_script = "uid://cjxduffu2ml43"
+
+[node name="Delay2" type="Node" parent="BTRoot/RSel/RSeq_Patrol" unique_id=237497900]
+script = ExtResource("16_5v73r")
+metadata/_custom_type_script = "uid://cbj2vvtafpc3o"
+
+[node name="Patrol" type="Node" parent="BTRoot/RSel/RSeq_Patrol/Delay2" unique_id=1262433083]
+script = ExtResource("17_fbm3w")
+metadata/_custom_type_script = "uid://cjxduffu2ml43"

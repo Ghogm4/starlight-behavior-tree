@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b7gxqnf8js8fc"]
+
+[ext_resource type="Texture2D" uid="uid://c8tjiyd3iigbr" path="res://icon.svg" id="1_r4qxo"]
+[ext_resource type="Script" uid="uid://g4hmbaexjptf" path="res://Demo/Enemy/Bullet.cs" id="2_ep8q0"]
+
+[node name="Bullet" type="Sprite2D" unique_id=3532682]
+texture = ExtResource("1_r4qxo")
+script = ExtResource("2_ep8q0")

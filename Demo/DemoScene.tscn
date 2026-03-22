@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b5srh0u7jfawb"]
+
+[ext_resource type="PackedScene" uid="uid://dsimyajkv5ck8" path="res://Demo/Player/Player.tscn" id="1_x4av3"]
+[ext_resource type="PackedScene" uid="uid://n7koj0ico0uo" path="res://Demo/Enemy/Enemy.tscn" id="2_rpqi1"]
+
+[node name="DemoScene" type="Node2D" unique_id=1377026685]
+
+[node name="Player" parent="." unique_id=2091744175 instance=ExtResource("1_x4av3")]
+
+[node name="CharacterBody2D" parent="." unique_id=898667702 instance=ExtResource("2_rpqi1")]
+position = Vector2(-552, 260)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1422605711]
+zoom = Vector2(0.55, 0.55)
