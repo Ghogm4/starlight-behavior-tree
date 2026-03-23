@@ -2,20 +2,20 @@
 
 [ext_resource type="Script" uid="uid://b3w0vcopv1wim" path="res://Demo/Enemy/Enemy.cs" id="1_1ypri"]
 [ext_resource type="Texture2D" uid="uid://c8tjiyd3iigbr" path="res://icon.svg" id="1_fkela"]
-[ext_resource type="Script" uid="uid://dwef71aunc2uf" path="res://nodes/composites/BTParallel.cs" id="1_vso2s"]
+[ext_resource type="Script" uid="uid://dwef71aunc2uf" path="res://addons/starlight_behavior_tree/nodes/composites/BTParallel.cs" id="1_vso2s"]
 [ext_resource type="Script" uid="uid://bhflbosr3ficp" path="res://Demo/Enemy/Action_MoveTowardPlayer.cs" id="2_fkela"]
-[ext_resource type="Script" uid="uid://cr85evtguvfv7" path="res://nodes/decorators/Cooldown.cs" id="3_d2k2y"]
-[ext_resource type="Script" uid="uid://d81m05b4dt0k" path="res://nodes/root/BTRoot.cs" id="3_kvarv"]
-[ext_resource type="Script" uid="uid://betnxyksq8fhk" path="res://nodes/composites/BTMemorySequence.cs" id="4_s5gka"]
+[ext_resource type="Script" uid="uid://cr85evtguvfv7" path="res://addons/starlight_behavior_tree/nodes/decorators/BTCooldown.cs" id="3_d2k2y"]
+[ext_resource type="Script" uid="uid://d81m05b4dt0k" path="res://addons/starlight_behavior_tree/nodes/decorators/BTRoot.cs" id="3_kvarv"]
+[ext_resource type="Script" uid="uid://betnxyksq8fhk" path="res://addons/starlight_behavior_tree/nodes/composites/BTMemorySequence.cs" id="4_s5gka"]
 [ext_resource type="Script" uid="uid://qpk0horg05db" path="res://Demo/Enemy/Condition_IsPlayerNearby.cs" id="5_fkela"]
-[ext_resource type="Script" uid="uid://rhffext4rqrk" path="res://nodes/composites/BTReactiveSelector.cs" id="6_s5gka"]
-[ext_resource type="Script" uid="uid://ce4yre30n4jlb" path="res://nodes/composites/BTReactiveSequence.cs" id="6_u7n3c"]
+[ext_resource type="Script" uid="uid://rhffext4rqrk" path="res://addons/starlight_behavior_tree/nodes/composites/BTReactiveSelector.cs" id="6_s5gka"]
+[ext_resource type="Script" uid="uid://ce4yre30n4jlb" path="res://addons/starlight_behavior_tree/nodes/composites/BTReactiveSequence.cs" id="6_u7n3c"]
 [ext_resource type="Script" uid="uid://b2t44pt2bl4e5" path="res://Demo/Enemy/Condition_IsPlayerWithinDistance.cs" id="7_nwx4d"]
 [ext_resource type="Script" uid="uid://bw8kfjqkp83c1" path="res://Demo/Enemy/Action_LaunchBullet.cs" id="7_uxjip"]
 [ext_resource type="Script" uid="uid://cluote4774wna" path="res://Demo/Enemy/Action_SpreadBullet.cs" id="8_o5xt3"]
 [ext_resource type="PackedScene" uid="uid://b7gxqnf8js8fc" path="res://Demo/Enemy/Bullet.tscn" id="9_uxjip"]
-[ext_resource type="Script" uid="uid://5o86wwe4pfog" path="res://nodes/decorators/Repeat.cs" id="14_mp8wm"]
-[ext_resource type="Script" uid="uid://cbj2vvtafpc3o" path="res://nodes/decorators/Delay.cs" id="16_5v73r"]
+[ext_resource type="Script" uid="uid://5o86wwe4pfog" path="res://addons/starlight_behavior_tree/nodes/decorators/BTRepeat.cs" id="14_mp8wm"]
+[ext_resource type="Script" uid="uid://cbj2vvtafpc3o" path="res://addons/starlight_behavior_tree/nodes/decorators/BTDelay.cs" id="16_5v73r"]
 [ext_resource type="Script" uid="uid://xl0r4y2oa28h" path="res://Demo/Enemy/Action_GetConfused.cs" id="16_fbm3w"]
 [ext_resource type="Script" uid="uid://cfofljhjwenuw" path="res://Demo/Enemy/Action_Patrol.cs" id="17_fbm3w"]
 
@@ -84,8 +84,6 @@ metadata/_custom_type_script = "uid://b3bo2uw0r20x3"
 
 [node name="Para" type="Node" parent="BTRoot/RSel/RSeq_FollowAndAttack" unique_id=508188872]
 script = ExtResource("1_vso2s")
-SuccessThreshold = 2
-FailureThreshold = 2
 metadata/_custom_type_script = "uid://dwef71aunc2uf"
 
 [node name="Repeat" type="Node" parent="BTRoot/RSel/RSeq_FollowAndAttack/Para" unique_id=2052164013]

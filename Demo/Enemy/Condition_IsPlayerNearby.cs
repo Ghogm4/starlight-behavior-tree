@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using StarlightBT.Nodes;
+using StarlightBT.Data;
 
 public partial class Condition_IsPlayerNearby : BTCondition
 {

@@ -25,6 +25,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="Starlight Behavior Tree"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/starlight_behavior_tree/plugin.cfg")
+
 [global_group]
 
 Player=""
