@@ -32,7 +32,7 @@ Nodes that perform actual logic, typically requiring user extension.
 - **`BTCondition`**: Condition Node Base Class. Used to check game state (e.g., is the enemy in range).
 
 ### Lifecycle Functions
-When inheriting from `BTNode` (or its subclasses like `BTAction`, `BTCondition`) to write custom nodes, you can override the following lifecycle functions to control node behavior:
+When inheriting from `BTAction` and `BTCondition` to write custom nodes, you can override the following lifecycle functions to control node behavior:
 
 - **`virtual void OnInit()`**
   - Called when the node is initialized. Used to retrieve Blackboard data or perform one-time setup.
