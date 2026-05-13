@@ -1,6 +1,7 @@
 # Starlight Behavior Tree 🌟
 
 ## Introduction
+
 **Starlight Behavior Tree** is a lightweight behavior tree plugin designed specifically for Godot C#.
 It provides a simple, intuitive, and easily extensible framework to help developers quickly build complex AI logic.
 
